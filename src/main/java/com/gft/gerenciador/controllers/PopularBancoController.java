@@ -38,6 +38,18 @@ public class PopularBancoController {
 		CasaDeShow casa2 = null;
 		CasaDeShow casa3 = null;
 		
+		
+		if(casas.isEmpty()) {
+			
+			casa1 = new CasaDeShow("Espaço das Americas", " R. Tagipuru, 795 - Barra Funda, São Paulo", null);
+			casa2 = new CasaDeShow("Estadio Pacaembu", "Praça Charles Miller - Pacaembu, São Paulo ", null);
+			casa3 = new CasaDeShow("Neo Quimica Arena", "Av. Miguel Ignácio Curi, 111 - Artur Alvim, São Paulo", null);
+			
+			casaDeShowService.salvarCasaDeShow(casa1);
+			casaDeShowService.salvarCasaDeShow(casa2);
+			casaDeShowService.salvarCasaDeShow(casa3);
+		}
+		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
 		Date dateFormat1 = null;
 		Date dateFormat2 = null;
@@ -49,17 +61,6 @@ public class PopularBancoController {
 			dateFormat3 = formato.parse("01/07/2022");
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
-		
-		if(casas.isEmpty()) {
-			
-			casa1 = new CasaDeShow("Espaço das Americas", " R. Tagipuru, 795 - Barra Funda, São Paulo", null);
-			casa2 = new CasaDeShow("Estadio Pacaembu", "Praça Charles Miller - Pacaembu, São Paulo ", null);
-			casa3 = new CasaDeShow("Neo Quimica Arena", "Av. Miguel Ignácio Curi, 111 - Artur Alvim, São Paulo", null);
-			
-			casaDeShowService.salvarCasaDeShow(casa1);
-			casaDeShowService.salvarCasaDeShow(casa2);
-			casaDeShowService.salvarCasaDeShow(casa3);
 		}
 		
 		Evento evento1 = null;

@@ -24,7 +24,7 @@ public class CasaDeShowController {
 
 	@Autowired
 	private CasaDeShowService casaDeShowService;
-	
+
 	@Autowired
 	private EventoService eventoService;
 
@@ -44,11 +44,11 @@ public class CasaDeShowController {
 			} catch (Exception e) {
 				casaDeShow = new CasaDeShow();
 				mv.addObject("mensagem", e.getMessage());
-				
+
 			}
 
 		}
-		
+
 		mv.addObject("casaDeShow", casaDeShow);
 		mv.addObject("lista", casaDeShowService.listarCasaDeShow());
 		return mv;
@@ -89,11 +89,12 @@ public class CasaDeShowController {
 	public ModelAndView excluirCasaDeShow(@RequestParam Long id, RedirectAttributes redirectAttributes) {
 
 		ModelAndView mv = new ModelAndView("redirect:/casa");
-		
+
 		List<Evento> eventos = eventoService.listarEvento();
-		
-		if(!eventos.isEmpty()) {
-			redirectAttributes.addFlashAttribute("mensagemValida", "Não é possível excluir Casa de Show com evento cadastrado!");
+
+		if (!eventos.isEmpty()) {
+			redirectAttributes.addFlashAttribute("mensagemValida",
+					"Não é possível excluir Casa de Show com evento cadastrado!");
 			return mv;
 		}
 
@@ -103,8 +104,7 @@ public class CasaDeShowController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("mensagem", "Erro ao excluir Casa de Show!!" + e.getMessage());
 		}
-		
-		
+
 		return mv;
 	}
 }

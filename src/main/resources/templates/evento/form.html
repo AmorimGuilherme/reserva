@@ -58,7 +58,7 @@
 					Evento</button>
 				<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
 					Nenhum evento cadastrado!</div>
-				<div class="alert alert-primary" th:if="${mensagem != null}"
+				<div class="alert alert-success" th:if="${mensagem != null}"
 					th:text="${mensagem}"></div>
 				<div th:if="${not #lists.isEmpty(lista)}">
 					<table class="table table-striped table-dark">
