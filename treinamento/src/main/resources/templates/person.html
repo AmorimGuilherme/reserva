@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Cadastrar Livro</title>
+</head>
+
+<body>
+
+	<form method="POST" th:action="@{/livro}" th:object="${livro}">
+		<input type="hidden" th:field="*{id}"></input>
+		Nome: <input type="text" th:field="*{nome}"></input><br>
+		Autor: <input type="text" th:field="*{autor}"></input><br>
+		<button type="submit">Gravar Pessoa</button>
+	</form>
+</body>
+</html>
