@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+<div class="alert alert-primary" th:if="${mensagemErro != null}"
+					th:text="${mensagemErro}"></div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Novo Evento</p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${evento}" th:action="@{/evento}">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group mb-3">
+					<label for="nome">Evento:</label> <input class="form-control"
+						type="text" th:field="*{nome}" required></input>
+					<div class="test-danger" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Capacidade:</label> <input class="form-control"
+						type="text" th:field="*{capacidade}" required></input>
+					<div class="test-danger" th:if="${#fields.hasErrors('capacidade')}"
+						th:errors="*{capacidade}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="date">Data:</label> <input class="form-control"
+						type="date" th:field="*{data}" required id="date"></input>
+					<div class="test-danger" th:if="${#fields.hasErrors('data')}"
+						th:errors="*{data}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Valor do Ingresso:</label> <input
+						class="form-control" type="text" th:field="*{precoIngresso}"
+						required></input>
+					<div class="test-danger"
+						th:if="${#fields.hasErrors('precoIngresso')}"
+						th:errors="*{precoIngresso}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Casa de Show:</label> <select class="form-select"
+						th:field="*{casaDeShow}">
+						<option th:each="casaDeShow : ${listarCasasDeShows}"
+							th:value="${casaDeShow.id}" th:text="${casaDeShow.nome}">
+					</select>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">Generos Musicais:</label> <select
+						class="form-select" th:field="*{generoMusical}">
+						<option th:each="generoMusical : ${listarGenerosMusicais}"
+							th:value="${generoMusical}" th:text="${generoMusical}">
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary mb-3">Salvar
+					Evento</button>
+				<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+					Nenhum evento cadastrado!</div>
+				<div class="alert alert-success" th:if="${mensagem != null}"
+					th:text="${mensagem}"></div>
+				<div th:if="${not #lists.isEmpty(lista)}">
+					<table class="table table-striped table-dark">
+						<thead class="bg-dark text-white">
+							<tr>
+								<th>Id</th>
+								<th>Nome</th>
+								<th>Capacidade</th>
+								<th>Preço do Ingresso</th>
+								<th>Casa de Show</th>
+								<th>Opções</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="evento : ${lista}">
+								<td th:text="${evento.id}"></td>
+								<td th:text="${evento.nome}"></td>
+								<td th:text="${evento.capacidade}"></td>
+								<td th:text="'R$'+ ${#numbers.formatDecimal(evento.precoIngresso, 0, 'POINT', 2, 'COMMA')}"></td>
+								<td th:text="${evento.casaDeShow.nome}"></td>
+								<td><a class="btn btn-primary btn-sm"
+									th:href="@{/evento(id=${evento.id})}">Editar</a> <a
+									class="btn btn-primary btn-sm"
+									th:href="@{/evento/excluir(id=${evento.id})}"
+									onclick="return confirm('Você realmente deseja excluir esse evento?')">Excluir</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+</html>
